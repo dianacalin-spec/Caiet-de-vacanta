@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caiet de Vacanță - Matematică Clasa a VI-a</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome pentru Iconițe -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- MathJax pentru Formule Matematice Elegante -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .title-font {
+            font-family: 'Comfortaa', cursive;
+        }
+        /* Personalizare scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-space {
+                display: block !important;
+                border: 1px dashed #cbd5e1 !important;
+                background-image: linear-gradient(#e2e8f0 1px, transparent 1px) !important;
+                background-size: 100% 24px !important;
+                height: 144px !important;
+                margin-top: 12px !important;
+                border-radius: 8px !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .exercise-card {
+                page-break-inside: avoid !important;
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+                margin-bottom: 20px !important;
+            }
+            .certificate-container {
+                display: block !important;
+                page-break-before: always !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <!-- Header / Navigatie -->
+    <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white shadow-lg no-print">
+        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="p-3 bg-white/20 backdrop-blur-md rounded-2xl text-3xl">
+                    📐
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold title-font tracking-tight">Misiunea: Clasa a VII-a</h1>
+                    <p class="text-indigo-100 text-xs sm:text-sm font-medium">Portofoliu de vacanță la matematică • Recapitulare Activă Clasa a VI-a</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Printează / Salvează PDF
+                </button>
+                <button onclick="confirmReset()" class="bg-red-500/20 hover:bg-red-500/40 text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 border border-red-500/30">
+                    <i class="fa-solid fa-trash-can"></i> Resetează Tema
+                </button>
+                <a href="#raport-profesor" class="bg-amber-400 hover:bg-amber-300 text-slate-950 px-4 py-2 rounded-xl text-sm font-bold transition flex items-center gap-2 shadow-md">
+                    <i class="fa-solid fa-graduation-cap"></i> Finalizează & Trimite!
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modal de confirmare resetare -->
+    <div id="reset-modal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 no-print">
+        <div class="bg-white p-6 rounded-2xl max-w-sm w-full shadow-xl border border-slate-100 text-center space-y-4">
+            <div class="text-red-500 text-4xl"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <h3 class="text-lg font-bold text-slate-900">Sigur vrei să ștergi tot?</h3>
+            <p class="text-slate-500 text-xs">Toate calculele scrise, răspunsurile și bifele de progres vor fi șterse definitiv.</p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="closeResetModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Anulează</button>
+                <button onclick="resetAllData()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition">Da, șterge tot</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prezentare Generală / Statistici de Lucru -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 w-full no-print">
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+            <div class="space-y-2 max-w-2xl">
+                <span class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Plan de Antrenament</span>
+                <h2 class="text-xl font-bold text-slate-900">Salutare, viitorule elev de clasa a VII-a! 👋</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Pregătește-te de noul an școlar rezolvând cele 40 de probleme propuse și cele 5 teste tematice. Sub fiecare exercițiu ai o <strong>ciornă digitală</strong>. La final, completează datele tale la subsol pentru a obține certificatul de vacanță și trimite-l pe Google Classroom!
+                </p>
+            </div>
+            <!-- Progress Tracker -->
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 w-full lg:w-72">
+                <div class="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                    <span>PROGRES TEMA</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-3 mb-3 overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-emerald-400 to-teal-500 h-full w-0 transition-all duration-500"></div>
+                </div>
+                <p class="text-[11px] text-slate-400 text-center italic">Progresul se bazează pe cele 40 de exerciții verificate corect!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meniu Capitole -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 w-full no-print">
+        <div class="bg-slate-200/60 p-1.5 rounded-2xl flex flex-wrap gap-1">
+            <button onclick="switchTab('cap1')" id="btn-cap1" class="tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 bg-white text-indigo-700 shadow-sm flex items-center justify-center gap-2">
+                <span class="text-base">📊</span> 1. Rapoarte & Procente
+            </button>
+            <button onclick="switchTab('cap2')" id="btn-cap2" class="tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2">
+                <span class="text-base">🔢</span> 2. Divizibilitate
+            </button>
+            <button onclick="switchTab('cap3')" id="btn-cap3" class="tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2">
+                <span class="text-base">📉</span> 3. Întregi & Raționale
+            </button>
+            <button onclick="switchTab('cap4')" id="btn-cap4" class="tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2">
+                <span class="text-base">📐</span> 4. Unghiuri & Triunghiuri
+            </button>
+            <button onclick="switchTab('cap5')" id="btn-cap5" class="tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2">
+                <span class="text-base">📐</span> 5. Tr. Dreptunghic
+            </button>
+        </div>
+    </nav>
+
+    <!-- Continut Capitole -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+
+        <!-- ================= CAPITOLUL 1 ================= -->
+        <section id="cap1" class="tab-content space-y-8">
+            <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-3xl p-6 sm:p-8 border border-indigo-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-indigo-200/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="p-2.5 bg-indigo-600 text-white rounded-xl text-lg"><i class="fa-solid fa-chart-pie"></i></span>
+                    <h3 class="text-xl sm:text-2xl font-black text-indigo-950">1. Rapoarte, Proporții și Procente</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-indigo-100/60">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Raport & Proporție</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">Un raport este $\frac{a}{b}$. O proporție este $\frac{a}{b} = \frac{c}{d} \iff a \cdot d = b \cdot c$.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-indigo-100/60">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Procente (%)</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">Valoarea reprezintă: $\frac{p}{100} \cdot x$. Ieftinirea: $x - p\% \cdot x$. Scumpirea: $x + p\% \cdot x$.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-indigo-100/60">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Proporționalitate</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">• D.P.: $\frac{x}{a} = \frac{y}{b} = k$.<br>• I.P.: $x \cdot a = y \cdot b = k$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Probleme Cap 1 -->
+            <div class="space-y-6">
+                <h4 class="text-lg font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-pencil text-indigo-600"></i> Probleme de Antrenament</h4>
+                <!-- Ex 1 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-1" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 1 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Află valoarea lui $x$ din proporția: $\frac{3x - 1}{10} = \frac{4}{5}$.</p>
+                        <textarea id="work-1-1" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-1" oninput="saveElementState(this)" placeholder="Rezultat (ex: 3)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('1-1', '3')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-1" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 2 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-2" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 2 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">O tabletă costă 1200 lei. Prețul acesteia se reduce cu $15\%$, iar după o lună noul preț se scumpeste cu $10\%$. Care este prețul final al tabletei?</p>
+                        <textarea id="work-1-2" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-2" oninput="saveElementState(this)" placeholder="Rezultat (lei)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('1-2', '1122')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-2" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 3 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-3" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 3 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Numerele $a$, $b$ și $c$ sunt direct proporționale cu $2$, $5$ și $9$. Știind că $c - a = 35$, determină valoarea produsului $a \cdot b$.</p>
+                        <textarea id="work-1-3" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-3" oninput="saveElementState(this)" placeholder="Rezultat" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('1-3', '250')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-3" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 4 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-4" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 4 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">Trei robinete cu același debit pot umple un bazin în $12$ ore. Dacă deschidem încă $2$ robinete identice cu primele, în câte ore și minute se va umple acum bazinul gol?</p>
+                        <textarea id="work-1-4" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-4" oninput="saveElementState(this)" placeholder="Ex: 7 ore si 12 min" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('1-4', ['7 ore si 12 minute', '7 ore si 12 min', '7h 12m', '7 ore si 12m'])" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-4" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 5 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-5" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 5 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Într-o clasă de $25$ de elevi, $40\%$ sunt băieți. Câte fete sunt în această clasă?</p>
+                        <textarea id="work-1-5" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-5" oninput="saveElementState(this)" placeholder="Rezultat" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('1-5', '15')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-5" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 6 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-6" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 6 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Dacă numerele nenule $x$ și $y$ verifică relația $3x = 5y$, află valoarea raportului $\frac{x}{y}$.</p>
+                        <textarea id="work-1-6" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-6" oninput="saveElementState(this)" placeholder="ex: 5/3" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('1-6', ['5/3', '5 : 3'])" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-6" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 7 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-7" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 7 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Împarte numărul $180$ în trei părți direct proporționale cu numerele $3$, $4$ și $5$. Care este valoarea celei mai mari părți?</p>
+                        <textarea id="work-1-7" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-7" oninput="saveElementState(this)" placeholder="Rezultat" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('1-7', '75')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-7" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 8 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-1-8" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-indigo-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 8 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">Prețul unui atlas geografic este de $50$ lei. Prețul se mărește cu $20\%$, iar după o perioadă, noul preț se reduce tot cu $20\%$. Care este prețul final al atlasului?</p>
+                        <textarea id="work-1-8" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-1-8" oninput="saveElementState(this)" placeholder="Rezultat (lei)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('1-8', '48')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-1-8" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MINI-TEST CAPITOLUL 1 -->
+            <div class="bg-white rounded-3xl p-6 border border-indigo-100 shadow-sm mt-8 no-print">
+                <div class="border-b border-indigo-50 pb-4 mb-4">
+                    <span class="bg-indigo-100 text-indigo-800 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Evaluare rapidă</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-2">📝 Mini-Test 1: Rapoarte, Proporții și Procente</h3>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">1. Află valoarea lui $x$ din proporția $\frac{x}{12} = \frac{5}{3}$:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t1-q1', 'a', 'false', this)" class="t1-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 15</button>
+                            <button onclick="submitQuiz('t1-q1', 'b', 'true', this)" class="t1-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 20</button>
+                            <button onclick="submitQuiz('t1-q1', 'c', 'false', this)" class="t1-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 25</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">2. Cât este $20\%$ din $150$?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t1-q2', 'a', 'true', this)" class="t1-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 30</button>
+                            <button onclick="submitQuiz('t1-q2', 'b', 'false', this)" class="t1-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 40</button>
+                            <button onclick="submitQuiz('t1-q2', 'c', 'false', this)" class="t1-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 50</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">3. Dacă $3\text{ kg}$ de mere costă $12\text{ lei}$, cât costă $5\text{ kg}$ de mere?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t1-q3', 'a', 'false', this)" class="t1-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 15 lei</button>
+                            <button onclick="submitQuiz('t1-q3', 'b', 'false', this)" class="t1-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 18 lei</button>
+                            <button onclick="submitQuiz('t1-q3', 'c', 'true', this)" class="t1-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 20 lei</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">4. Într-o clasă, raportul dintre fete și băieți este $\frac{2}{3}$. Dacă sunt $12$ fete, câți băieți sunt?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t1-q4', 'a', 'false', this)" class="t1-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 14</button>
+                            <button onclick="submitQuiz('t1-q4', 'b', 'true', this)" class="t1-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 18</button>
+                            <button onclick="submitQuiz('t1-q4', 'c', 'false', this)" class="t1-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 24</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">5. Un rucsac costă $80\text{ lei}$. După o scumpire cu $10\%$, noul preț este de:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t1-q5', 'a', 'false', this)" class="t1-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 82 lei</button>
+                            <button onclick="submitQuiz('t1-q5', 'b', 'true', this)" class="t1-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 88 lei</button>
+                            <button onclick="submitQuiz('t1-q5', 'c', 'false', this)" class="t1-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 90 lei</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                    <span id="score-t1" class="text-xs font-bold text-slate-500">Scor: 0 / 5 răspunsuri corecte</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CAPITOLUL 2 ================= -->
+        <section id="cap2" class="tab-content hidden space-y-8">
+            <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-6 sm:p-8 border border-emerald-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-emerald-200/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="p-2.5 bg-emerald-600 text-white rounded-xl text-lg"><i class="fa-solid fa-list-ol"></i></span>
+                    <h3 class="text-xl sm:text-2xl font-black text-emerald-950">2. Divizibilitatea în $\mathbb{N}$</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-emerald-100/60">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Divizor / Multiplu</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">Spunem că $d \mid a$ dacă există $k \in \mathbb{N}$ astfel încât $a = d \cdot k$.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-emerald-100/60">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">C.m.m.d.c.</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">Înmulțim factorii comuni, la puterea cea mai mică. Scriere: $(a, b)$.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-emerald-100/60">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">C.m.m.m.c.</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">Înmulțim factorii comuni și necomuni, la puterea cea mai mare. Scriere: $[a, b]$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Probleme Cap 2 -->
+            <div class="space-y-6">
+                <h4 class="text-lg font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-pencil text-emerald-600"></i> Probleme de Antrenament</h4>
+                <!-- Ex 1 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-1" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 1 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Află cel mai mic multiplu comun $[a, b]$ pentru numerele: $a = 120$ și $b = 150$.</p>
+                        <textarea id="work-2-1" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-1" oninput="saveElementState(this)" placeholder="Răspuns final" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-1', '600')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-1" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 2 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-2" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 2 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Câte numere de forma $\overline{2x5y}$ divizibile simultan cu $2$ și cu $9$ au ultima cifră egala cu $2$?</p>
+                        <textarea id="work-2-2" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-2" oninput="saveElementState(this)" placeholder="Răspuns" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-2', '2')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-2" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 3 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-3" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 3 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">Trei nave de croazieră pleacă astăzi simultan din port. Prima pleacă o dată la fiecare $12$ zile, a doua la fiecare $18$ zile, iar a treia la fiecare $30$ zile. Peste câte zile se vor reîntâlni în port?</p>
+                        <textarea id="work-2-3" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-3" oninput="saveElementState(this)" placeholder="Răspuns final" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-3', '180')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-3" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 4 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-4" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 4 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">Demonstrează că numărul $A = 3^{n+1} \cdot 5^n + 3^n \cdot 5^{n+1}$ este divizibil cu $8$, pentru orice număr natural $n \in \mathbb{N}$. Ce număr obții în paranteză după factorul comun $3^n \cdot 5^n$?</p>
+                        <textarea id="work-2-4" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-4" oninput="saveElementState(this)" placeholder="Rezultat paranteză" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-4', '8')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-4" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 5 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-5" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 5 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Determină numărul total de valori ale cifrei $x$ pentru care numărul de forma $\overline{1x2}$ este divizibil cu $3$.</p>
+                        <textarea id="work-2-5" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-5" oninput="saveElementState(this)" placeholder="Număr de valori" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-5', '4')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-5" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 6 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-6" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 6 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Determină cel mai mic număr natural care, împărțit pe rând la $12$, $15$ și $18$, dă de fiecare dată restul $5$ și un cât nenul.</p>
+                        <textarea id="work-2-6" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-6" oninput="saveElementState(this)" placeholder="Numărul căutat" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-6', '185')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-6" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 7 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-7" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 7 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Câți divizori naturali are numărul $48$?</p>
+                        <textarea id="work-2-7" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-7" oninput="saveElementState(this)" placeholder="Număr de divizori" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-7', '10')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-7" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 8 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-2-8" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-emerald-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 8 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Află suma tuturor numerelor naturale $n$ pentru care fracția $\frac{12}{n+2}$ este un număr natural.</p>
+                        <textarea id="work-2-8" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-2-8" oninput="saveElementState(this)" placeholder="Suma" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('2-8', '16')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-2-8" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MINI-TEST CAPITOLUL 2 -->
+            <div class="bg-white rounded-3xl p-6 border border-emerald-100 shadow-sm mt-8 no-print">
+                <div class="border-b border-emerald-50 pb-4 mb-4">
+                    <span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Evaluare rapidă</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-2">📝 Mini-Test 2: Divizibilitate</h3>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">1. Care este cel mai mare divizor comun al numerelor $18$ și $24$?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t2-q1', 'a', 'false', this)" class="t2-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 2</button>
+                            <button onclick="submitQuiz('t2-q1', 'b', 'true', this)" class="t2-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 6</button>
+                            <button onclick="submitQuiz('t2-q1', 'c', 'false', this)" class="t2-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 72</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">2. Cel mai mic multiplu comun al numerelor $8$ și $12$ este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t2-q2', 'a', 'false', this)" class="t2-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 4</button>
+                            <button onclick="submitQuiz('t2-q2', 'b', 'false', this)" class="t2-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 16</button>
+                            <button onclick="submitQuiz('t2-q2', 'c', 'true', this)" class="t2-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 24</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">3. Care dintre următoarele numere este divizibil simultan cu $3$ și cu $5$?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t2-q3', 'a', 'true', this)" class="t2-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 75</button>
+                            <button onclick="submitQuiz('t2-q3', 'b', 'false', this)" class="t2-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 80</button>
+                            <button onclick="submitQuiz('t2-q3', 'c', 'false', this)" class="t2-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 83</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">4. Câți divizori proprii are numărul $10$?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t2-q4', 'a', 'false', this)" class="t2-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 4</button>
+                            <button onclick="submitQuiz('t2-q4', 'b', 'true', this)" class="t2-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 2</button>
+                            <button onclick="submitQuiz('t2-q4', 'c', 'false', this)" class="t2-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 1</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">5. Numărul de forma $\overline{2x5}$ este divizibil cu $9$ dacă $x$ este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t2-q5', 'a', 'true', this)" class="t2-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 2</button>
+                            <button onclick="submitQuiz('t2-q5', 'b', 'false', this)" class="t2-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 4</button>
+                            <button onclick="submitQuiz('t2-q5', 'c', 'false', this)" class="t2-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 9</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                    <span id="score-t2" class="text-xs font-bold text-slate-500">Scor: 0 / 5 răspunsuri corecte</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CAPITOLUL 3 ================= -->
+        <section id="cap3" class="tab-content hidden space-y-8">
+            <!-- Teorie Colorata -->
+            <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-6 sm:p-8 border border-amber-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="p-2.5 bg-amber-600 text-white rounded-xl text-lg"><i class="fa-solid fa-calculator"></i></span>
+                    <h3 class="text-xl sm:text-2xl font-black text-amber-950">3. Numere Întregi ($\mathbb{Z}$) și Raționale ($\mathbb{Q}$)</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-amber-100/60">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE RAPIDĂ</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Modulul & Semnele</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                            <strong>Modulul</strong> reprezintă distanța pe axă de la origine. Este întotdeauna pozitiv sau zero: $|-x| = x$.
+                        </p>
+                        <div class="bg-amber-50/50 p-2.5 rounded-xl text-center text-[11px] border border-amber-100">
+                            <strong>Regula Semnelor:</strong><br>
+                            $(+) \cdot (+) = + \quad (-) \cdot (-) = +$<br>
+                            $(+) \cdot (-) = - \quad (-) \cdot (+) = -$
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-amber-100/60">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE RAPIDĂ</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Fracții în $\mathbb{Q}$</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                            Pentru adunare/scădere aducem la <strong>numitor comun</strong>. La înmulțire simplificăm și înmulțim direct:
+                        </p>
+                        <div class="bg-amber-50/50 p-3 rounded-xl text-center font-mono text-xs border border-amber-100">
+                            $$\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}$$
+                            $$\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}$$
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-amber-100/60">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE RAPIDĂ</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Ecuații pe Scurt</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                            Când muți un termen peste semnul egal, îi **schimbi semnul** (din $+$ devine $-$, din înmulțire devine împărțire):
+                        </p>
+                        <div class="bg-amber-50/50 p-3 rounded-xl text-center font-mono text-xs border border-amber-100">
+                            $$ax + b = c \implies ax = c - b$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercitii Propuse -->
+            <div class="space-y-6">
+                <h4 class="text-lg font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-pencil text-amber-600"></i> Probleme de Antrenament</h4>
+
+                <!-- Ex 1 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition">
+                    <input type="checkbox" id="chk-3-1" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 border-slate-300 rounded focus:ring-amber-500 cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2 py-0.5 rounded uppercase">Ușor</span>
+                            <span class="text-xs font-bold text-slate-400">Exercițiul 1</span>
+                        </div>
+                        <p class="text-sm text-slate-700 font-medium">Calculează rezultatul calculului: $E = (-24) : (+6) - (-3) \cdot (-4) + |-15|$.</p>
+                        <textarea id="work-3-1" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-1" oninput="saveElementState(this)" placeholder="Răspuns final" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none focus:border-amber-400">
+                            <button onclick="validateAnswer('3-1', '-1')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition">Verifică</button>
+                            <span id="feedback-3-1" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-3-2" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 2 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Rezolvă ecuația în mulțimea numerelor raționale $\mathbb{Q}$: $\frac{2}{3} \cdot (x - \frac{1}{2}) + \frac{1}{4} = \frac{7}{12}$.</p>
+                        <textarea id="work-3-2" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-2" oninput="saveElementState(this)" placeholder="Răspuns final" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('3-2', '1')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-3-2" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-3-3" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 3 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">Află cel mai mic număr întreg $x$ care este soluție a inecuației: $3(x - 2) \le 5x + 4$.</p>
+                        <textarea id="work-3-3" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-3" oninput="saveElementState(this)" placeholder="Răspuns (ex: -5)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('3-3', '-5')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-3-3" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ex 4 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-3-4" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 4 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">Calculează suma alternantă de mai jos: $S = (-1) + 2 + (-3) + 4 + \dots + (-99) + 100$. (Sfat: grupează termenii doi câte doi!).</p>
+                        <textarea id="work-3-4" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-4" oninput="saveElementState(this)" placeholder="Răspuns final" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('3-4', '50')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-3-4" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ex 5 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-3-5" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 5 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Află toate soluțiile întregi ale ecuației cu modul: $|2x - 3| = 7$.</p>
+                        <textarea id="work-3-5" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-5" oninput="saveElementState(this)" placeholder="Răspuns (ex: 5 si -2)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('3-5', ['5 si -2', '-2 si 5', '5, -2', '5,-2', '-2,5', '-2, 5'])" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-3-5" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-3-6" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 6 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Calculează, respectând ordinea operațiilor în $\mathbb{Q}$: $(-\frac{3}{5}) : (\frac{9}{10}) + (-\frac{1}{3})^2 \cdot 18$.</p>
+                        <textarea id="work-3-6" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-6" oninput="saveElementState(this)" placeholder="Răspuns (ex: 4/3)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('3-6', ['4/3', '1.33'])" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-3-6" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ex 7 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-3-7" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 7 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Media aritmetică a trei numere raționale este $4,5$. Știind că media aritmetică a primelor două numere este $3,8$, află valoarea celui de-al treilea număr.</p>
+                        <textarea id="work-3-7" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-7" oninput="saveElementState(this)" placeholder="Răspuns (ex: 5.9)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('3-7', ['5.9', '5,9'])" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-3-7" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ex 8 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-3-8" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-amber-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 8 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Află numărul de elemente din mulțimea $A = \{x \in \mathbb{Z} \mid \frac{5}{2x-1} \in \mathbb{Z}\}$.</p>
+                        <textarea id="work-3-8" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-3-8" oninput="saveElementState(this)" placeholder="Număr de elemente" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('3-8', '4')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-3-8" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MINI-TEST CAPITOLUL 3 -->
+            <div class="bg-white rounded-3xl p-6 border border-amber-100 shadow-sm mt-8 no-print">
+                <div class="border-b border-amber-50 pb-4 mb-4">
+                    <span class="bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Evaluare rapidă</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-2">📝 Mini-Test 3: Numere Întregi și Raționale</h3>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">1. Rezultatul calculului $(-5) \cdot (+3) - (-2)$ este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t3-q1', 'a', 'true', this)" class="t3-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) -13</button>
+                            <button onclick="submitQuiz('t3-q1', 'b', 'false', this)" class="t3-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) -17</button>
+                            <button onclick="submitQuiz('t3-q1', 'c', 'false', this)" class="t3-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 13</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">2. Valoarea calculului $|-8| + |+3| - |-5|$ este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t3-q2', 'a', 'false', this)" class="t3-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 16</button>
+                            <button onclick="submitQuiz('t3-q2', 'b', 'true', this)" class="t3-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 6</button>
+                            <button onclick="submitQuiz('t3-q2', 'c', 'false', this)" class="t3-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 10</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">3. Soluția ecuației $3x - 5 = -20$ în mulțimea $\mathbb{Z}$ este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t3-q3', 'a', 'false', this)" class="t3-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 5</button>
+                            <button onclick="submitQuiz('t3-q3', 'b', 'true', this)" class="t3-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) -5</button>
+                            <button onclick="submitQuiz('t3-q3', 'c', 'false', this)" class="t3-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) -25</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">4. Rezultatul calculului $\frac{3}{4} : \frac{9}{8}$ sub formă ireductibilă este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t3-q4', 'a', 'true', this)" class="t3-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 2/3</button>
+                            <button onclick="submitQuiz('t3-q4', 'b', 'false', this)" class="t3-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 27/32</button>
+                            <button onclick="submitQuiz('t3-q4', 'c', 'false', this)" class="t3-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 3/2</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">5. Dacă $x \in \mathbb{Z}$ astfel încât $-3 < x \le 2$, câte valori poate lua $x$?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t3-q5', 'a', 'false', this)" class="t3-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 4</button>
+                            <button onclick="submitQuiz('t3-q5', 'b', 'true', this)" class="t3-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 5</button>
+                            <button onclick="submitQuiz('t3-q5', 'c', 'false', this)" class="t3-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 6</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                    <span id="score-t3" class="text-xs font-bold text-slate-500">Scor: 0 / 5 răspunsuri corecte</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CAPITOLUL 4 ================= -->
+        <section id="cap4" class="tab-content hidden space-y-8">
+            <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl p-6 sm:p-8 border border-pink-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-pink-200/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="p-2.5 bg-pink-600 text-white rounded-xl text-lg"><i class="fa-solid fa-shapes"></i></span>
+                    <h3 class="text-xl sm:text-2xl font-black text-pink-950">4. Geometrie: Unghiuri și Triunghiuri</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-pink-100/60">
+                        <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Unghiuri Importante</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-2">• <strong>Complementare:</strong> Suma lor este $90^\circ$.<br>• <strong>Suplimentare:</strong> Suma lor este $180^\circ$.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-pink-100/60">
+                        <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Linii Importante</h4>
+                        <p class="text-[11px] text-slate-600 leading-relaxed">• Bisectoare (Intersecție $I$)<br>• Mediatoare ($O$)<br>• Înălțime ($H$)<br>• Mediană ($G$)</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-pink-100/60">
+                        <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Congruență</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Cazurile de congruență ale triunghiurilor oarecare sunt: L.U.L., U.L.U. și L.L.L.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Probleme Cap 4 -->
+            <div class="space-y-6">
+                <h4 class="text-lg font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-pencil text-pink-600"></i> Probleme de Antrenament</h4>
+                <!-- Ex 1 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-1" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 1 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Raportul măsurilor a două unghiuri complementare este $\frac{2}{3}$. Află măsura unghiului mai mare (în grade).</p>
+                        <textarea id="work-4-1" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-1" oninput="saveElementState(this)" placeholder="Răspuns final (grade)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('4-1', '54')" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-1" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 2 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-2" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 2 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul isoscel $ABC$ cu baza $BC$, măsura unghiului exterior vârfului $A$ este de $110^\circ$. Calculează măsura unghiului $\sphericalangle B$ al triunghiului (în grade).</p>
+                        <textarea id="work-4-2" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-2" oninput="saveElementState(this)" placeholder="Răspuns (grade)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('4-2', '55')" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-2" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 3 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-3" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 3 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">Fie $M$ mijlocul bazei $BC$ a unui triunghi isoscel $ABC$ ($AB=AC$). Pe laturile $AB$ și $AC$ se iau punctele $P$, respectiv $Q$ astfel încât $AP = AQ$. Prin ce caz de congruență se demonstrează că triunghiurile $BMP$ și $CMQ$ sunt egale?</p>
+                        <textarea id="work-4-3" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-3" oninput="saveElementState(this)" placeholder="Cazul (ex: LUL)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('4-3', ['LUL', 'L.U.L.', 'Latura Unghi Latura'])" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-3" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 4 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-4" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 4 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, unghiurile $\sphericalangle B$ și $\sphericalangle C$ au măsurile de $45^\circ$, respectiv $75^\circ$. Află măsura unghiului format de înălțimea dusă din $A$ cu bisectoarea unghiului $A$ (în grade).</p>
+                        <textarea id="work-4-4" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-4" oninput="saveElementState(this)" placeholder="Răspuns final (grade)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('4-4', '15')" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-4" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 5 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-5" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 5 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Două unghiuri opuse la vârf au suma măsurilor de $130^\circ$. Află măsura complementului unuia dintre ele (în grade).</p>
+                        <textarea id="work-4-5" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-5" oninput="saveElementState(this)" placeholder="Răspuns final (grade)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('4-5', '25')" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-5" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 6 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-6" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 6 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">Fie $ABC$ un triunghi echilateral și $M$ mijlocul bazei $BC$. Construim perpendiculara $MP \perp AB$ ($P \in AB$) și $MQ \perp AC$ ($Q \in AC$). Ce poți spune despre lungimile segmentelor $MP$ și $MQ$? (egale sau diferite).</p>
+                        <textarea id="work-4-6" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-6" oninput="saveElementState(this)" placeholder="Relația (ex: egale)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('4-6', ['egale', 'MP=MQ', 'congruente'])" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-6" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 7 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-7" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 7 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Un unghi are măsura de $60^\circ$. Află valoarea raportului dintre complementul și suplimentul acestuia.</p>
+                        <textarea id="work-4-7" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-7" oninput="saveElementState(this)" placeholder="Răspuns (ex: 1/4)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswerLoose('4-7', ['1/4', '0.25', '1:4'])" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-7" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 8 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-4-8" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-pink-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 8 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, măsura unghiului $C$ este de $30^\circ$. Știind că lungimea ipotenuzei $BC$ este de $12\text{ cm}$, află lungimea catetei $AB$ (în cm).</p>
+                        <textarea id="work-4-8" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-4-8" oninput="saveElementState(this)" placeholder="Răspuns final (cm)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('4-8', '6')" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-4-8" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MINI-TEST CAPITOLUL 4 -->
+            <div class="bg-white rounded-3xl p-6 border border-pink-100 shadow-sm mt-8 no-print">
+                <div class="border-b border-pink-50 pb-4 mb-4">
+                    <span class="bg-pink-100 text-pink-800 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Evaluare rapidă</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-2">📝 Mini-Test 4: Unghiuri și Triunghiuri</h3>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">1. Două unghiuri sunt complementare. Dacă unul dintre ele are măsura de $40^\circ$, celălalt are:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t4-q1', 'a', 'true', this)" class="t4-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 50°</button>
+                            <button onclick="submitQuiz('t4-q1', 'b', 'false', this)" class="t4-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 140°</button>
+                            <button onclick="submitQuiz('t4-q1', 'c', 'false', this)" class="t4-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 60°</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">2. Suma măsurilor unghiurilor oricărui triunghi oarecare este egală cu:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t4-q2', 'a', 'false', this)" class="t4-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 90°</button>
+                            <button onclick="submitQuiz('t4-q2', 'b', 'true', this)" class="t4-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 180°</button>
+                            <button onclick="submitQuiz('t4-q2', 'c', 'false', this)" class="t4-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 360°</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">3. În triunghiul isoscel $ABC$ ($AB=AC$), dacă $\sphericalangle B = 50^\circ$, atunci unghiul $\sphericalangle A$ are:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t4-q3', 'a', 'false', this)" class="t4-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 50°</button>
+                            <button onclick="submitQuiz('t4-q3', 'b', 'true', this)" class="t4-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 80°</button>
+                            <button onclick="submitQuiz('t4-q3', 'c', 'false', this)" class="t4-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 100°</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">4. Punctul de intersecție al înălțimilor într-un triunghi se numește:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t4-q4', 'a', 'false', this)" class="t4-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) Centru de greutate</button>
+                            <button onclick="submitQuiz('t4-q4', 'b', 'true', this)" class="t4-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) Ortocentru</button>
+                            <button onclick="submitQuiz('t4-q4', 'c', 'false', this)" class="t4-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) Centru înscris</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">5. Dacă un unghi are măsura de $120^\circ$, suplimentul său are măsura de:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t4-q5', 'a', 'true', this)" class="t4-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 60°</button>
+                            <button onclick="submitQuiz('t4-q5', 'b', 'false', this)" class="t4-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 30°</button>
+                            <button onclick="submitQuiz('t4-q5', 'c', 'false', this)" class="t4-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 180°</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                    <span id="score-t4" class="text-xs font-bold text-slate-500">Scor: 0 / 5 răspunsuri corecte</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CAPITOLUL 5 ================= -->
+        <section id="cap5" class="tab-content hidden space-y-8">
+            <div class="bg-gradient-to-br from-sky-50 to-indigo-50 rounded-3xl p-6 sm:p-8 border border-sky-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-sky-200/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="p-2.5 bg-sky-600 text-white rounded-xl text-lg"><i class="fa-solid fa-square-root-variable"></i></span>
+                    <h3 class="text-xl sm:text-2xl font-black text-sky-950">5. Triunghiul Dreptunghic</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-sky-100/60">
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Teorema lui Pitagora</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">În orice triunghi dreptunghic: $\text{catetă}_1^2 + \text{catetă}_2^2 = \text{ipotenuză}^2$.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-sky-100/60">
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Unghiul de $30^\circ$</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">Cateta opusă unghiului de $30^\circ$ este jumătate din lungimea ipotenuzei.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-sky-100/60">
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded-md">TEORIE</span>
+                        <h4 class="font-bold text-slate-900 mt-3 mb-2">Teorema Medianei</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">Mediana corespunzătoare ipotenuzei este egală cu jumătate din lungimea ipotenuzei.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Probleme Cap 5 -->
+            <div class="space-y-6">
+                <h4 class="text-lg font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-pencil text-sky-600"></i> Probleme de Antrenament</h4>
+                <!-- Ex 1 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-1" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 1 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, măsura unghiului $\sphericalangle B$ este de $40^\circ$. Calculează măsura unghiului $\sphericalangle C$ (în grade).</p>
+                        <textarea id="work-5-1" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-1" oninput="saveElementState(this)" placeholder="Răspuns (grade)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-1', '50')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-1" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 2 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-2" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 2 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, mediana $AM$ corespunzătoare ipotenuzei are lungimea de $8\text{ cm}$. Află lungimea ipotenuzei $BC$ (în cm).</p>
+                        <textarea id="work-5-2" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-2" oninput="saveElementState(this)" placeholder="Răspuns (cm)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-2', '16')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-2" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 3 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-3" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 3 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, măsura unghiului $\sphericalangle C$ este de $30^\circ$, iar lungimea ipotenuzei $BC$ este de $10\text{ cm}$. Află lungimea catetei $AB$ (în cm).</p>
+                        <textarea id="work-5-3" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-3" oninput="saveElementState(this)" placeholder="Răspuns (cm)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-3', '5')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-3" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 4 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-4" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 4 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, catetele au lungimile $AB = 6\text{ cm}$ și $AC = 8\text{ cm}$. Calculează lungimea ipotenuzei $BC$ (în cm).</p>
+                        <textarea id="work-5-4" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-4" oninput="saveElementState(this)" placeholder="Răspuns (cm)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-4', '10')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-4" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 5 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-5" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 5 (Mediu)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, măsura unghiului dintre înălțimea $AD \perp BC$ și mediana $AM$ este de $20^\circ$. Determină măsura unghiului ascuțit mai mic al triunghiului $ABC$ (în grade).</p>
+                        <textarea id="work-5-5" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-5" oninput="saveElementState(this)" placeholder="Răspuns (grade)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-5', '35')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-5" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 6 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-6" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 6 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, înălțimea $AD \perp BC$ împarte ipotenuza în segmentele $BD = 3\text{ cm}$ și $CD = 12\text{ cm}$. Află lungimea înălțimii $AD$ (în cm), știind că $AD^2 = BD \cdot CD$.</p>
+                        <textarea id="work-5-6" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-6" oninput="saveElementState(this)" placeholder="Răspuns (cm)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-6', '6')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-6" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 7 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-7" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 7 (Ușor)</p>
+                        <p class="text-sm text-slate-700 font-medium">Un triunghi dreptunghic are lungimea unei catete de $12\text{ cm}$ și lungimea ipotenuzei de $13\text{ cm}$. Determină lungimea celeilalte catete (în cm).</p>
+                        <textarea id="work-5-7" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-7" oninput="saveElementState(this)" placeholder="Răspuns (cm)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-7', '5')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-7" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+                <!-- Ex 8 -->
+                <div class="exercise-card bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-start gap-4">
+                    <input type="checkbox" id="chk-5-8" onchange="toggleExercise(this)" class="w-5 h-5 mt-1 text-sky-600 rounded cursor-pointer">
+                    <div class="flex-1 space-y-3">
+                        <p class="text-xs font-bold text-slate-400">Exercițiul 8 (Dificil)</p>
+                        <p class="text-sm text-slate-700 font-medium">În triunghiul $ABC$, dreptunghic în $A$, măsura unghiului $\sphericalangle B = 60^\circ$ și $AD \perp BC$ ($D \in BC$). Dacă $BD = 4\text{ cm}$, determină lungimea ipotenuzei $BC$ (în cm).</p>
+                        <textarea id="work-5-8" oninput="saveElementState(this)" placeholder="Spațiu pentru calcule..." class="no-print w-full p-3 text-xs border border-slate-200 rounded-xl focus:ring-2 focus:ring-sky-200 h-20 resize-none"></textarea>
+                        <div class="no-print flex items-center gap-2">
+                            <input type="text" id="ans-5-8" oninput="saveElementState(this)" placeholder="Răspuns (cm)" class="p-2 border border-slate-200 rounded-lg text-xs w-40 outline-none">
+                            <button onclick="validateAnswer('5-8', '16')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-2 rounded-lg text-xs">Verifică</button>
+                            <span id="feedback-5-8" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="print-space hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MINI-TEST CAPITOLUL 5 -->
+            <div class="bg-white rounded-3xl p-6 border border-sky-100 shadow-sm mt-8 no-print">
+                <div class="border-b border-sky-50 pb-4 mb-4">
+                    <span class="bg-sky-100 text-sky-800 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Evaluare rapidă</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-2">📝 Mini-Test 5: Triunghiul Dreptunghic</h3>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">1. Care este ipotenuza în triunghiul dreptunghic $MNP$ cu $\sphericalangle M = 90^\circ$?</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t5-q1', 'a', 'false', this)" class="t5-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) MN</button>
+                            <button onclick="submitQuiz('t5-q1', 'b', 'false', this)" class="t5-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) MP</button>
+                            <button onclick="submitQuiz('t5-q1', 'c', 'true', this)" class="t5-q1 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) NP</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">2. Dacă un triunghi dreptunghic are catetele de $3\text{ cm}$ și $4\text{ cm}$, ipotenuza este de:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t5-q2', 'a', 'false', this)" class="t5-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 7 cm</button>
+                            <button onclick="submitQuiz('t5-q2', 'b', 'true', this)" class="t5-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 5 cm</button>
+                            <button onclick="submitQuiz('t5-q2', 'c', 'false', this)" class="t5-q2 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 6 cm</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">3. Mediana corespunzătoare ipotenuzei într-un triunghi dreptunghic cu ipotenuza de $20\text{ cm}$ are lungimea de:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t5-q3', 'a', 'true', this)" class="t5-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 10 cm</button>
+                            <button onclick="submitQuiz('t5-q3', 'b', 'false', this)" class="t5-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 5 cm</button>
+                            <button onclick="submitQuiz('t5-q3', 'c', 'false', this)" class="t5-q3 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 40 cm</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">4. Dacă un triunghi are lungimile laturilor de $5\text{ cm}$, $12\text{ cm}$ și $13\text{ cm}$, atunci triunghiul este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t5-q4', 'a', 'true', this)" class="t5-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) Dreptunghic</button>
+                            <button onclick="submitQuiz('t5-q4', 'b', 'false', this)" class="t5-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) Echilateral</button>
+                            <button onclick="submitQuiz('t5-q4', 'c', 'false', this)" class="t5-q4 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) Obtuzunghic</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">5. În triunghiul dreptunghic $ABC$ ($\sphericalangle A=90^\circ$), înălțimea $AD \perp BC$ are măsura de $12\text{ cm}$, iar proiecția catetei $BD = 9\text{ cm}$. Lungimea segmentului $CD$ este:</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="submitQuiz('t5-q5', 'a', 'false', this)" class="t5-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">a) 15 cm</button>
+                            <button onclick="submitQuiz('t5-q5', 'b', 'true', this)" class="t5-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">b) 16 cm</button>
+                            <button onclick="submitQuiz('t5-q5', 'c', 'false', this)" class="t5-q5 border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white">c) 20 cm</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-sky-100 flex justify-between items-center">
+                    <span id="score-t5" class="text-xs font-bold text-slate-500">Scor: 0 / 5 răspunsuri corecte</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTIUNEA DE RAPORT & EVALUARE PROFESOR ================= -->
+        <section id="raport-profesor" class="mt-16 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md no-print">
+            <div class="border-b border-slate-100 pb-6 mb-6">
+                <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">SECȚIUNE PROFESOR</span>
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-2">🎓 Panou Final: Trimite Progresul tău!</h3>
+                <p class="text-slate-500 text-sm mt-1">Completează datele tale pentru a genera raportul final de vacanță pe care îl vei trimite pe Google Classroom.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                <!-- Inputs -->
+                <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Numele și Prenumele Elevului:</label>
+                        <input type="text" id="student-name" oninput="saveElementState(this); generateFullReport();" placeholder="Introdu numele complet..." class="w-full p-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Clasa (ex: a VII-a A):</label>
+                        <input type="text" id="student-class" oninput="saveElementState(this); generateFullReport();" placeholder="Introdu clasa în care treci..." class="w-full p-3 border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition">
+                    </div>
+                    <button onclick="copyReportToClipboard()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold p-3.5 rounded-xl text-sm transition shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy"></i> Copiază Raportul pentru Classroom
+                    </button>
+                    <button onclick="window.print()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold p-3.5 rounded-xl text-sm transition shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i> Descarcă Diplomă de Absolvire (PDF)
+                    </button>
+                    <div id="copy-toast" class="hidden text-center text-xs text-emerald-600 font-bold bg-emerald-50 p-2.5 rounded-lg border border-emerald-100">
+                        Raportul a fost copiat în clipboard! Lipsește-l (Paste) în comentariile private pe Google Classroom.
+                    </div>
+                </div>
+
+                <!-- Preview Live Raport -->
+                <div class="border border-slate-200 rounded-2xl p-5 bg-slate-900 text-slate-200 font-mono text-xs space-y-3 relative overflow-hidden shadow-inner">
+                    <div class="absolute top-2 right-2 text-slate-700 text-sm">CONSOLE_</div>
+                    <p class="text-indigo-400 font-bold">>>> LIVE_PROGRESS_REPORT.txt</p>
+                    <div class="space-y-1 text-slate-300 leading-relaxed" id="live-report-text"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICAT DE ABSOLVIRE (Ascuns pe ecran în mod normal, vizibil doar la printare) -->
+        <section class="certificate-container hidden max-w-4xl mx-auto my-12 p-8 border-8 border-indigo-600 bg-white rounded-3xl relative overflow-hidden shadow-2xl text-center">
+            <div class="absolute -top-12 -left-12 w-32 h-32 bg-indigo-500 rounded-full blur-xl opacity-20"></div>
+            <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-pink-500 rounded-full blur-xl opacity-20"></div>
+            
+            <span class="text-indigo-600 text-4xl mb-4 inline-block"><i class="fa-solid fa-award"></i></span>
+            <h1 class="text-3xl font-extrabold title-font text-slate-950 tracking-wide uppercase">Diplomă de Merit</h1>
+            <p class="text-slate-500 text-xs tracking-widest uppercase mt-1">Se acordă cu mândrie elevului / elevei</p>
+            
+            <h2 id="cert-student-name" class="text-2xl sm:text-3xl font-black text-indigo-950 my-6 border-b-2 border-slate-100 pb-2 inline-block px-12 italic">Nume Elev</h2>
+            
+            <p class="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
+                pentru absolvirea cu succes a portofoliului complet de vacanță <strong class="text-slate-800">„Misiunea: Clasa a VII-a”</strong>, recapitulând activ cele mai importante capitole de matematică din clasa a VI-a.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8 max-w-2xl mx-auto text-left">
+                <div class="bg-indigo-50/50 p-3 rounded-xl text-center border border-indigo-100">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase">Aplicații Rezolvate</span>
+                    <strong id="cert-ex-done" class="text-indigo-700 text-sm sm:text-base font-bold">0 / 40</strong>
+                </div>
+                <div class="bg-indigo-50/50 p-3 rounded-xl text-center border border-indigo-100">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase">Test Proporții</span>
+                    <strong id="cert-t1" class="text-indigo-700 text-sm sm:text-base font-bold">0 / 5</strong>
+                </div>
+                <div class="bg-indigo-50/50 p-3 rounded-xl text-center border border-indigo-100">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase">Test Divizori</span>
+                    <strong id="cert-t2" class="text-indigo-700 text-sm sm:text-base font-bold">0 / 5</strong>
+                </div>
+                <div class="bg-indigo-50/50 p-3 rounded-xl text-center border border-indigo-100">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase">Test Întregi</span>
+                    <strong id="cert-t3" class="text-indigo-700 text-sm sm:text-base font-bold">0 / 5</strong>
+                </div>
+                <div class="bg-indigo-50/50 p-3 rounded-xl text-center border border-indigo-100">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase">Test Unghiuri</span>
+                    <strong id="cert-t4" class="text-indigo-700 text-sm sm:text-base font-bold">0 / 5</strong>
+                </div>
+                <div class="bg-indigo-50/50 p-3 rounded-xl text-center border border-indigo-100">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase">Test Tr. Dreptunghic</span>
+                    <strong id="cert-t5" class="text-indigo-700 text-sm sm:text-base font-bold">0 / 5</strong>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center bg-slate-50 p-2.5 rounded-xl border border-slate-100 max-w-xs mx-auto">
+                <span class="block text-[10px] font-bold text-slate-400 uppercase">Clasa</span>
+                <strong id="cert-student-class" class="text-indigo-700 text-sm sm:text-base font-bold">A VI-a</strong>
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-slate-100 flex justify-between text-xs text-slate-400 max-w-md mx-auto">
+                <div>
+                    <span class="block font-bold">Data Completării</span>
+                    <span id="cert-date">-</span>
+                </div>
+                <div>
+                    <span class="block font-bold">Profesor Coordonator</span>
+                    <span class="text-indigo-600 font-bold">Verificat Online ✓</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripturi de Functionare Interfețe -->
+    <script>
+        let resolvedExercises = new Set();
+        const totalExercisesCount = 40;
+
+        let quizScores = {
+            t1: { score: 0, answers: {} },
+            t2: { score: 0, answers: {} },
+            t3: { score: 0, answers: {} },
+            t4: { score: 0, answers: {} },
+            t5: { score: 0, answers: {} }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedState();
+            generateFullReport();
+        });
+
+        function updateGeneralProgress() {
+            let percent = Math.round((resolvedExercises.size / totalExercisesCount) * 100);
+            document.getElementById('progress-percent').innerText = percent + "%";
+            document.getElementById('progress-bar').style.width = percent + "%";
+            generateFullReport();
+        }
+
+        function validateAnswer(exId, correctAnswer) {
+            let inputVal = document.getElementById('ans-' + exId).value.trim();
+            let feedback = document.getElementById('feedback-' + exId);
+            
+            if (inputVal === correctAnswer) {
+                feedback.className = "text-xs font-bold text-emerald-600";
+                feedback.innerHTML = "Corect! 🎉";
+                resolvedExercises.add(exId);
+            } else {
+                feedback.className = "text-xs font-bold text-rose-500";
+                feedback.innerHTML = "Mai încearcă! 🤔";
+                resolvedExercises.delete(exId);
+            }
+            updateGeneralProgress();
+            saveResolvedList();
+        }
+
+        function validateAnswerLoose(exId, correctAnswersArray) {
+            let inputVal = document.getElementById('ans-' + exId).value.trim().toLowerCase();
+            let feedback = document.getElementById('feedback-' + exId);
+            
+            let isCorrect = correctAnswersArray.some(ans => inputVal.includes(ans.toLowerCase()));
+
+            if (isCorrect) {
+                feedback.className = "text-xs font-bold text-emerald-600";
+                feedback.innerHTML = "Corect! 🎉";
+                resolvedExercises.add(exId);
+            } else {
+                feedback.className = "text-xs font-bold text-rose-500";
+                feedback.innerHTML = "Mai încearcă! 🤔";
+                resolvedExercises.delete(exId);
+            }
+            updateGeneralProgress();
+            saveResolvedList();
+        }
+
+        function toggleExercise(checkbox) {
+            if (checkbox.checked) {
+                checkbox.parentElement.classList.add('bg-emerald-50/20');
+            } else {
+                checkbox.parentElement.classList.remove('bg-emerald-50/20');
+            }
+            localStorage.setItem(checkbox.id, checkbox.checked ? "true" : "false");
+        }
+
+        function saveElementState(element) {
+            localStorage.setItem(element.id, element.value);
+        }
+
+        function saveResolvedList() {
+            localStorage.setItem('resolved_exercises_v3', JSON.stringify(Array.from(resolvedExercises)));
+        }
+
+        function submitQuiz(questionKey, optionSelected, isCorrect, buttonElement) {
+            const parts = questionKey.split('-');
+            const quizId = parts[0];
+            const questionId = parts[1];
+
+            document.querySelectorAll('.' + questionKey).forEach(btn => {
+                btn.className = questionKey + " border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white text-slate-800";
+            });
+
+            if (isCorrect === 'true') {
+                buttonElement.className = questionKey + " border border-emerald-500 bg-emerald-50 text-emerald-800 p-2 rounded-xl text-xs font-bold";
+                quizScores[quizId].answers[questionId] = 1;
+            } else {
+                buttonElement.className = questionKey + " border border-rose-500 bg-rose-50 text-rose-800 p-2 rounded-xl text-xs font-bold";
+                quizScores[quizId].answers[questionId] = 0;
+            }
+
+            let finalQuizScore = 0;
+            Object.keys(quizScores[quizId].answers).forEach(q => {
+                finalQuizScore += quizScores[quizId].answers[q];
+            });
+            quizScores[quizId].score = finalQuizScore;
+
+            localStorage.setItem('quiz_scores_v3', JSON.stringify(quizScores));
+            localStorage.setItem('selected_' + questionKey, optionSelected);
+
+            document.getElementById('score-' + quizId).innerText = `Scor: ${finalQuizScore} / 5 răspunsuri corecte`;
+            generateFullReport();
+        }
+
+        function generateFullReport() {
+            const name = document.getElementById('student-name').value.trim() || '[Nume Elev]';
+            const cls = document.getElementById('student-class').value.trim() || '[Clasă]';
+            const dateStr = new Date().toLocaleDateString('ro-RO');
+
+            const scoreT1 = quizScores.t1.score;
+            const scoreT2 = quizScores.t2.score;
+            const scoreT3 = quizScores.t3.score;
+            const scoreT4 = quizScores.t4.score;
+            const scoreT5 = quizScores.t5.score;
+
+            const resolvedCount = resolvedExercises.size;
+            const progressPct = Math.round((resolvedCount / totalExercisesCount) * 100);
+
+            const verificationCode = `V-${name.substring(0,2).toUpperCase()}-${cls.substring(0,2).toUpperCase()}-${resolvedCount}EX-${scoreT1}${scoreT2}${scoreT3}${scoreT4}${scoreT5}`;
+
+            const liveText = `
+========================================<br>
+🎓 RAPORT DE EVALUARE MATEMATICĂ VI-VII<br>
+========================================<br>
+Elev: <span class="text-amber-300 font-bold">${name}</span><br>
+Clasa: <span class="text-amber-300 font-bold">${cls}</span><br>
+Data predării: ${dateStr}<br>
+----------------------------------------<br>
+🎯 PROGRES EXERCIȚII PROPUSE:<br>
+- Exerciții rezolvate: <span class="text-emerald-400 font-bold">${resolvedCount} / ${totalExercisesCount}</span> (${progressPct}%)<br>
+----------------------------------------<br>
+📊 REZULTATE MINI-TESTE GRILĂ:<br>
+- Test 1 (Rapoarte & Procente): <span class="text-indigo-300 font-bold">${scoreT1} / 5</span> corecte<br>
+- Test 2 (Divizibilitate):      <span class="text-emerald-300 font-bold">${scoreT2} / 5</span> corecte<br>
+- Test 3 (Întregi & Raționale):  <span class="text-amber-300 font-bold">${scoreT3} / 5</span> corecte<br>
+- Test 4 (Geometrie generală):  <span class="text-pink-300 font-bold">${scoreT4} / 5</span> corecte<br>
+- Test 5 (Tr. Dreptunghic):     <span class="text-cyan-300 font-bold">${scoreT5} / 5</span> corecte<br>
+----------------------------------------<br>
+🔒 COD DE VERIFICARE PROFESOR:<br>
+<span class="text-pink-400 font-bold">${verificationCode}</span><br>
+========================================
+            `;
+
+            document.getElementById('live-report-text').innerHTML = liveText;
+
+            // Actualizare pe Diplomatia de Print
+            document.getElementById('cert-student-name').innerText = name;
+            document.getElementById('cert-student-class').innerText = cls;
+            document.getElementById('cert-ex-done').innerText = `${resolvedCount} / ${totalExercisesCount}`;
+            document.getElementById('cert-t1').innerText = `${scoreT1} / 5`;
+            document.getElementById('cert-t2').innerText = `${scoreT2} / 5`;
+            document.getElementById('cert-t3').innerText = `${scoreT3} / 5`;
+            document.getElementById('cert-t4').innerText = `${scoreT4} / 5`;
+            document.getElementById('cert-t5').innerText = `${scoreT5} / 5`;
+            document.getElementById('cert-date').innerText = dateStr;
+        }
+
+        function copyReportToClipboard() {
+            const name = document.getElementById('student-name').value.trim() || '[Nume Elev]';
+            const cls = document.getElementById('student-class').value.trim() || '[Clasă]';
+            const dateStr = new Date().toLocaleDateString('ro-RO');
+            const scoreT1 = quizScores.t1.score;
+            const scoreT2 = quizScores.t2.score;
+            const scoreT3 = quizScores.t3.score;
+            const scoreT4 = quizScores.t4.score;
+            const scoreT5 = quizScores.t5.score;
+            const resolvedCount = resolvedExercises.size;
+            const progressPct = Math.round((resolvedCount / totalExercisesCount) * 100);
+            const verificationCode = `V-${name.substring(0,2).toUpperCase()}-${cls.substring(0,2).toUpperCase()}-${resolvedCount}EX-${scoreT1}${scoreT2}${scoreT3}${scoreT4}${scoreT5}`;
+
+            const textToCopy = `=== RAPORT MATEMATICĂ CLASA A VI-A (TREC A VII-A) ===\nElev: ${name}\nClasă: ${cls}\nData: ${dateStr}\nExerciții rezolvate corect: ${resolvedCount} / ${totalExercisesCount} (${progressPct}%)\nRezultate teste:\n - Test 1: ${scoreT1}/5\n - Test 2: ${scoreT2}/5\n - Test 3: ${scoreT3}/5\n - Test 4: ${scoreT4}/5\n - Test 5: ${scoreT5}/5\nCod securizat de validare profesor: ${verificationCode}\n========================================`;
+
+            const el = document.createElement('textarea');
+            el.value = textToCopy;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 5000);
+        }
+
+        function loadSavedState() {
+            const allTextInputs = document.querySelectorAll('textarea, input[type="text"]');
+            allTextInputs.forEach(input => {
+                const savedValue = localStorage.getItem(input.id);
+                if (savedValue !== null) {
+                    input.value = savedValue;
+                }
+            });
+
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            allCheckboxes.forEach(chk => {
+                const savedVal = localStorage.getItem(chk.id);
+                if (savedVal === "true") {
+                    chk.checked = true;
+                    chk.parentElement.classList.add('bg-emerald-50/20');
+                }
+            });
+
+            const savedResolved = localStorage.getItem('resolved_exercises_v3');
+            if (savedResolved) {
+                const arr = JSON.parse(savedResolved);
+                resolvedExercises = new Set(arr);
+                arr.forEach(exId => {
+                    const feedback = document.getElementById('feedback-' + exId);
+                    if (feedback) {
+                        feedback.className = "text-xs font-bold text-emerald-600";
+                        feedback.innerHTML = "Corect! 🎉";
+                    }
+                });
+            }
+
+            const savedScores = localStorage.getItem('quiz_scores_v3');
+            if (savedScores) {
+                quizScores = JSON.parse(savedScores);
+                ['t1', 't2', 't3', 't4', 't5'].forEach(id => {
+                    const el = document.getElementById('score-' + id);
+                    if (el) {
+                        el.innerText = `Scor: ${quizScores[id].score} / 5 răspunsuri corecte`;
+                    }
+                });
+
+                ['t1', 't2', 't3', 't4', 't5'].forEach(quizId => {
+                    for(let i=1; i<=5; i++) {
+                        const questionKey = `${quizId}-q${i}`;
+                        const option = localStorage.getItem('selected_' + questionKey);
+                        if (option) {
+                            const buttons = document.querySelectorAll('.' + questionKey);
+                            buttons.forEach(btn => {
+                                if (btn.getAttribute('onclick').includes(`'${option}'`)) {
+                                    const isBtnCorrect = btn.getAttribute('onclick').includes("'true'");
+                                    if (isBtnCorrect) {
+                                        btn.className = questionKey + " border border-emerald-500 bg-emerald-50 text-emerald-800 p-2 rounded-xl text-xs font-bold";
+                                    } else {
+                                        btn.className = questionKey + " border border-rose-500 bg-rose-50 text-rose-800 p-2 rounded-xl text-xs font-bold";
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+
+            updateGeneralProgress();
+        }
+
+        function confirmReset() {
+            document.getElementById('reset-modal').classList.remove('hidden');
+        }
+
+        function closeResetModal() {
+            document.getElementById('reset-modal').classList.add('hidden');
+        }
+
+        function resetAllData() {
+            localStorage.clear();
+            resolvedExercises.clear();
+            quizScores = {
+                t1: { score: 0, answers: {} },
+                t2: { score: 0, answers: {} },
+                t3: { score: 0, answers: {} },
+                t4: { score: 0, answers: {} },
+                t5: { score: 0, answers: {} }
+            };
+            
+            document.querySelectorAll('textarea, input[type="text"]').forEach(input => input.value = "");
+            document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+                chk.checked = false;
+                chk.parentElement.classList.remove('bg-emerald-50/20');
+            });
+            
+            ['t1', 't2', 't3', 't4', 't5'].forEach(t => {
+                for (let i = 1; i <= 5; i++) {
+                    const questionKey = `${t}-q${i}`;
+                    document.querySelectorAll('.' + questionKey).forEach(btn => {
+                        btn.className = questionKey + " border border-slate-100 hover:bg-slate-50 p-2 rounded-xl text-xs font-medium bg-white text-slate-800";
+                    });
+                }
+                const el = document.getElementById('score-' + t);
+                if (el) {
+                    el.innerText = `Scor: 0 / 5 răspunsuri corecte`;
+                }
+            });
+            
+            document.querySelectorAll('[id^="feedback-"]').forEach(f => f.innerHTML = "");
+
+            updateGeneralProgress();
+            closeResetModal();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2";
+            });
+
+            let btn = document.getElementById('btn-' + tabId);
+            
+            if (tabId === 'cap1') {
+                btn.className = "tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 bg-white text-indigo-700 shadow-sm flex items-center justify-center gap-2";
+            } else if (tabId === 'cap2') {
+                btn.className = "tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 bg-white text-emerald-700 shadow-sm flex items-center justify-center gap-2";
+            } else if (tabId === 'cap3') {
+                btn.className = "tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 bg-white text-amber-700 shadow-sm flex items-center justify-center gap-2";
+            } else if (tabId === 'cap4') {
+                btn.className = "tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 bg-white text-pink-700 shadow-sm flex items-center justify-center gap-2";
+            } else if (tabId === 'cap5') {
+                btn.className = "tab-btn flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition duration-200 bg-white text-sky-700 shadow-sm flex items-center justify-center gap-2";
+            }
+        }
+    </script>
+</body>
+</html>
